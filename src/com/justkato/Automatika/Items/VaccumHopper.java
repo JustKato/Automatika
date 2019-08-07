@@ -43,16 +43,7 @@ public class VaccumHopper implements Listener {
     }
 
     public static ItemStack GenerateItem() {
-        ItemStack item = new ItemStack(material);
-        ItemMeta meta = item.getItemMeta();
-
-        meta.setDisplayName(displayName);
-        meta.setLocalizedName(localized);
-        meta.setLore(Arrays.asList(lore));
-        meta.setCustomModelData(23);
-
-        item.setItemMeta(meta);
-        return item;
+        return ItemMaster.GenerateGenericItem(material, displayName, localized, lore);
     }
 
     public void InitializeHopperLoop() {
@@ -120,7 +111,7 @@ public class VaccumHopper implements Listener {
         particle_loc.add(0.5f, 0.65f, 0.5f);
 
         // Error checking
-        if ( hand == null || loc == null || hand.getType().equals(Material.AIR) || !hand.getType().equals(Material.HOPPER)) return;
+        if ( hand == null || loc == null || hand.getType().equals(Material.AIR) || !hand.getType().equals(Material.HOPPER) || !hand.getItemMeta().getLocalizedName().equals(localized)) return;
 
         if ( Boolean.parseBoolean(FileManager.settings.get("vaccum_hopper_particles"))) {
             loc.getWorld().spawnParticle(Particle.COMPOSTER, particle_loc, 25, 0.3f, 0.2f, 0.3f, 0.1f);

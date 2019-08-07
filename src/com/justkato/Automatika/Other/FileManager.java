@@ -105,6 +105,12 @@ public class FileManager {
                 yaml.set("block_breaker.sound", "true");
 
 
+                // Auto Dropper Settings
+                yaml.set("auto_dropper.enabled", "true");
+                yaml.set("auto_dropper.particles", "true");
+                yaml.set("auto_dropper.sound", "true");
+
+
                 yaml.save(config); // Save the file
 
                 InitializeConfig();
@@ -192,6 +198,23 @@ public class FileManager {
                 map.put("block_placer_sound", (String) yaml.get("block_breaker.sound"));
             else
                 map.put("block_placer_sound", "true");
+
+
+            // Auto Dropper Settings
+            if ( yaml.get("auto_dropper.enabled") != null )
+                map.put("auto_dropper_enabled", (String) yaml.get("auto_dropper.enabled"));
+            else
+                map.put("auto_dropper_enabled", "true");
+
+            if ( yaml.get("auto_dropper.particles") != null )
+                map.put("auto_dropper_particles", (String) yaml.get("auto_dropper.particles"));
+            else
+                map.put("auto_dropper_particles", "true");
+
+            if ( yaml.get("auto_dropper.sound") != null )
+                map.put("auto_dropper_sound", (String) yaml.get("auto_dropper.sound"));
+            else
+                map.put("auto_dropper_sound", "true");
 
 
             for ( String key: map.keySet()) {

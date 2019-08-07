@@ -39,17 +39,7 @@ public class BlockBreaker implements Listener {
     }
 
     public static ItemStack GenerateItem() {
-        ItemStack item = new ItemStack(material);
-        ItemMeta meta = item.getItemMeta();
-
-        assert meta != null;
-        meta.setDisplayName(displayName); // Set display name
-        meta.setLocalizedName(localized); // set localized name
-        meta.setLore(Arrays.asList(lore));// set the lore
-        meta.setCustomModelData(23);
-
-        item.setItemMeta(meta);
-        return item;
+        return ItemMaster.GenerateGenericItem(material, displayName, localized, lore);
     }
 
     @EventHandler

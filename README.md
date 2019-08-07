@@ -21,21 +21,39 @@ of it's inventory, if it doesn't have a valid block ( an item would be invalid )
 it will make a failure sound, the same applies if the front of the block is
 being obscured by another.
 
-
-## Mechanics
-// TODO
+#### Auto Dropper
+Once an item has been mechanically and not manually added inside of the
+dropper inventory ( Hopper, OtherDropper, etc... ). It will drop it 
+after exactly 10 ticks.
 
   
 ## Admin Tools
-// TODO
+  
+`/Automatika og` - Opens the admin GUI for spawning in items   
+`/Automatika reload` - Reloads the config   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
+## API
+
+#### Spawning in the items
+
+You can find the items under `com.justkato.Automatika.Items.*`, every
+item has the `GenerateItem()` method. Use that to spawn in the items
+into your GUI/World/Recipe
+
+##### Example:
+```java
+import com.justkato.Automatika.Items.*;
+
+class MyGUI {
+    public static Inventory getInventory() {
+        Inventory inv = Bukkit.createInventory(null, 9*5, "My Cool Gui");
+        // Generate a Vaccum Hopper
+        ItemStack vaccum_dropper = VaccumDropper.GenerateItem();
+        inv.add(vaccum_dropper);
+
+        return inv;
+    }
+}
+
+```

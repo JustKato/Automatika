@@ -39,20 +39,11 @@ public class BlockPlacer implements Listener {
     public BlockPlacer(Main _plugin) {
         this.plugin = _plugin;
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
-        locations = FileManager.LoadData("block_placer");
+        locations = FileManager.LoadData(localized);
     }
 
     public static ItemStack GenerateItem() {
-        ItemStack item = new ItemStack(material);
-        ItemMeta meta = item.getItemMeta();
-
-        meta.setDisplayName(displayName);
-        meta.setLocalizedName(localized);
-        meta.setLore(Arrays.asList(lore));
-        meta.setCustomModelData(23);
-
-        item.setItemMeta(meta);
-        return item;
+        return ItemMaster.GenerateGenericItem(material, displayName, localized, lore);
     }
 
     @EventHandler
@@ -78,7 +69,7 @@ public class BlockPlacer implements Listener {
             for ( int i = 0; i < inv.getSize(); i++ ) inv.setItem(i, FillerItem.GenerateItem()); // Fill with filler :)
             inv.setItem(4, new ItemStack(Material.AIR)); // Replace the middle with AIR ( PICK SLOT )
 
-            FileManager.SaveData("block_placer", locations);
+            FileManager.SaveData(localized, locations);
         }
     }
 
@@ -100,7 +91,7 @@ public class BlockPlacer implements Listener {
                 p.spawnParticle(Particle.SPIT, particle_loc, 20, 0.3f, 0.2f, 0.3f, 0.075f);
             }
             locations.remove(loc); // Remove the location from the location list
-            FileManager.SaveData("block_placer", locations);
+            FileManager.SaveData(localized, locations);
         }
     }
 
