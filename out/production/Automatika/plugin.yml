@@ -1,0 +1,32 @@
+name: Automatika
+main: com.justkato.Automatika.Main
+version: "1.0F"
+author: "Kato Twofold"
+description: "A plugin that adds new automation machines/blocks/items to minecraft"
+api-version: 1.14
+load: POSTWORLD
+website: "https://github.com/MissingPotato"
+prefix: Automatika-Logger
+commands:
+  opengui:
+    description: Open the Admin GUI
+    aliases: [og]
+    usage: /opengui
+    permission: Automatika.admin.gui
+    permission-message: "You do not have sufficient permission"
+permissions:
+  Automatika.*:
+    description: Gain access to all Automatika commands, actions, blocks, tools
+    default: op
+    children:
+      Automatika.admin.*:
+        description: Gain access to all Automatika admin commands
+        children:
+          Automatika.admin.gui:
+            description: Admin GUI for spawning all the items
+            default: op
+      Automatika.user.*:
+        description: Gain access to all recommened Automatika commands
+        default: true
+      Automatika.dev.*:
+        description: Gain access to all the dev-tools provided by automatika

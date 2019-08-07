@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Automatika:jar">
+    <output-path>D:/Libraries/MyPlugins</output-path>
+    <root id="archive" name="Automatika.jar">
+      <element id="module-output" name="Automatika" />
+    </root>
+  </artifact>
+</component>
