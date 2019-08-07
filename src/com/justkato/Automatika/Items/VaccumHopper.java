@@ -4,12 +4,14 @@ package com.justkato.Automatika.Items;
 import com.justkato.Automatika.Main;
 import com.justkato.Automatika.Other.FileManager;
 import org.bukkit.*;
+import org.bukkit.block.Hopper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -67,6 +69,27 @@ public class VaccumHopper implements Listener {
                     if ( !hopper.getBlock().getType().equals(Material.HOPPER) ) { locations.remove(hopper); break; }
                     particle_loc = hopper.clone();
                     particle_loc.add(.5f, .85f, .5f);
+
+                    Inventory inv = ((Hopper) hopper.getBlock().getState()).getInventory();
+                    boolean full_inventory = true;
+                    try {
+                        for (ItemStack item : inv.getContents()) {
+                            if (item == null) {
+                                full_inventory = false;
+                            }
+                            if (item.getType().equals(Material.AIR)) {
+                                full_inventory = false;
+                            }
+                            if (item.getAmount() != item.getMaxStackSize()) {
+                                full_inventory = false;
+                            }
+                        }
+                    } catch (Exception ex) {
+                        full_inventory = false;
+                    }
+
+                    if ( full_inventory ) return;
+
                     if ( Boolean.parseBoolean(FileManager.settings.get("vaccum_hopper_particles")) )
                         hopper.getWorld().spawnParticle(Particle.SPELL_WITCH, particle_loc, 25, 0.3f, 0.2f, 0.3f, 0.1f);
                     try {
