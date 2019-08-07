@@ -1,6 +1,7 @@
 package com.justkato.Automatika.Events;
 
-import com.justkato.Automatika.Items.AutoBreaker;
+import com.justkato.Automatika.Items.BlockBreaker;
+import com.justkato.Automatika.Items.BlockPlacer;
 import com.justkato.Automatika.Items.FillerItem;
 import com.justkato.Automatika.Items.VaccumHopper;
 import com.justkato.Automatika.Main;
@@ -15,7 +16,9 @@ public class EventMaster {
     public static void InitializeEvents(Main plugin) {
         // Initialize all the other Events
         VaccumHopper vaccumHopper = new VaccumHopper(plugin);
-        AutoBreaker autoBreaker = new AutoBreaker(plugin);
+        BlockBreaker autoBreaker = new BlockBreaker(plugin);
+        BlockPlacer blockPlacer =  new BlockPlacer(plugin);
+
         FillerItem fillerItem = new FillerItem(plugin);
     }
 

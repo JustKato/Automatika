@@ -15,13 +15,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class VaccumHopper implements Listener {
     // Hopper settings
-    static int range = 5;
+    static int range = Integer.parseInt(FileManager.settings.get("vaccum_hopper_range"));
     public static List<Location> locations = new ArrayList<>();
     // Default item generator Settings
     static String displayName = ChatColor.GREEN + "Vaccum Hopper";
@@ -46,12 +47,17 @@ public class VaccumHopper implements Listener {
         meta.setDisplayName(displayName);
         meta.setLocalizedName(localized);
         meta.setLore(Arrays.asList(lore));
+        meta.setCustomModelData(23);
 
         item.setItemMeta(meta);
         return item;
     }
 
     public void InitializeHopperLoop() {
+
+        if ( !Boolean.parseBoolean(FileManager.settings.get("vaccum_hopper_enabled")) )
+            return;
+
         BukkitRunnable loop = new BukkitRunnable() {
             Location particle_loc = null;
             @Override
@@ -61,7 +67,8 @@ public class VaccumHopper implements Listener {
                     if ( !hopper.getBlock().getType().equals(Material.HOPPER) ) { locations.remove(hopper); break; }
                     particle_loc = hopper.clone();
                     particle_loc.add(.5f, .85f, .5f);
-                    hopper.getWorld().spawnParticle(Particle.SPELL_WITCH, particle_loc, 25, 0.3f, 0.2f, 0.3f, 0.1f);
+                    if ( Boolean.parseBoolean(FileManager.settings.get("vaccum_hopper_particles")) )
+                        hopper.getWorld().spawnParticle(Particle.SPELL_WITCH, particle_loc, 25, 0.3f, 0.2f, 0.3f, 0.1f);
                     try {
                         for (Entity nearby : hopper.getWorld().getNearbyEntities(hopper, VaccumHopper.range, VaccumHopper.range, VaccumHopper.range)) {
                             if (nearby.getType().equals(EntityType.DROPPED_ITEM)) {
@@ -92,9 +99,12 @@ public class VaccumHopper implements Listener {
         // Error checking
         if ( hand == null || loc == null || hand.getType().equals(Material.AIR) || !hand.getType().equals(Material.HOPPER)) return;
 
-        loc.getWorld().spawnParticle(Particle.COMPOSTER, particle_loc, 25, 0.3f, 0.2f, 0.3f, 0.1f);
-        loc.getWorld().spawnParticle(Particle.SMOKE_NORMAL, particle_loc, 30, 0.3f, 0.2f, 0.3f, 0.06f);
-        loc.getWorld().playSound(particle_loc, Sound.BLOCK_NOTE_BLOCK_BIT, 1F, 0.1F);
+        if ( Boolean.parseBoolean(FileManager.settings.get("vaccum_hopper_particles"))) {
+            loc.getWorld().spawnParticle(Particle.COMPOSTER, particle_loc, 25, 0.3f, 0.2f, 0.3f, 0.1f);
+            loc.getWorld().spawnParticle(Particle.SMOKE_NORMAL, particle_loc, 30, 0.3f, 0.2f, 0.3f, 0.06f);
+        }
+        if ( Boolean.parseBoolean(FileManager.settings.get("vaccum_hopper_sound")))
+            loc.getWorld().playSound(particle_loc, Sound.BLOCK_NOTE_BLOCK_BIT, 1F, 0.1F);
 
         locations.add(loc);
         FileManager.SaveData("vaccum_hopper", locations);

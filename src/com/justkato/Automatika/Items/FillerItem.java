@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ItemSpawnEvent;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -33,6 +34,14 @@ public class FillerItem implements Listener {
     void onFillerDrop(ItemSpawnEvent event ) {
         if ( event.getEntity().getItemStack().equals(GenerateItem())) {
             event.getEntity().remove();
+        }
+    }
+
+    // Prevent the filter item from ever dropping
+    @EventHandler
+    void onFillerDrop(InventoryMoveItemEvent event ) {
+        if ( event.getItem().equals(GenerateItem())) {
+            event.setCancelled(true);
         }
     }
 
