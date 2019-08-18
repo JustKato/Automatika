@@ -24,7 +24,7 @@ public class VaccumHopper implements Listener {
     static int range = Integer.parseInt(FileManager.settings.get("vaccum_hopper_range"));
     public static List<Location> locations = new ArrayList<>();
     // Default item generator Settings
-    static String displayName = ChatColor.GREEN + "Vaccum Hopper";
+    static String displayName = ChatColor.GREEN + "Vacuum Hopper";
     static String localized = "vaccum_hopper";
     static Material material = Material.HOPPER;
     static String[] lore = {
@@ -53,6 +53,9 @@ public class VaccumHopper implements Listener {
             @Override
             public void run() {
                 for ( Location hopper: locations ) {
+
+                    if ( !hopper.getChunk().isLoaded() ) return;
+
                     // Error Checking
                     if ( !hopper.getBlock().getType().equals(Material.HOPPER) ) { locations.remove(hopper); break; }
                     particle_loc = hopper.clone();
@@ -66,9 +69,6 @@ public class VaccumHopper implements Listener {
                                 full_inventory = false;
                             }
                             if (item.getType().equals(Material.AIR)) {
-                                full_inventory = false;
-                            }
-                            if (item.getAmount() != item.getMaxStackSize()) {
                                 full_inventory = false;
                             }
                         }
