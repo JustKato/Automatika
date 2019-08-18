@@ -17,23 +17,26 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class OpenGui implements CommandExecutor, Listener {
+public class OpenGui implements Listener {
     public static String gui_name = "Item GUI";
     Main plugin;
     public OpenGui(Main _plugin) {
         this.plugin = _plugin;
-        this.plugin.getCommand("opengui").setExecutor(this::onCommand);
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        Player p = null;
-        if ( sender instanceof Player) p = (Player) sender;
-        else { sender.sendMessage(ChatColor.RED + "Only players can access the GUI"); return true; }
-        if ( !sender.hasPermission("Automatika.admin.gui") ) { sender.sendMessage(ChatColor.RED + "You do not have permissions for this command"); return true; }
-        p.openInventory(GenerateGui());
-        return true;
+    public static void onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if ( args[0].toLowerCase().equals("gui") ) {
+            Player p = null;
+            if (sender instanceof Player) p = (Player) sender;
+            else {
+                sender.sendMessage(ChatColor.RED + "Only players can access the GUI");
+            }
+            if (!sender.hasPermission("Automatika.admin.gui")) {
+                sender.sendMessage(ChatColor.RED + "You do not have permissions for this command");
+            }
+            p.openInventory(GenerateGui());
+        }
     }
 
     public static Inventory GenerateGui() {

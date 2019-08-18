@@ -16,6 +16,8 @@ public class EventMaster {
         BlockBreaker autoBreaker = new BlockBreaker(plugin);
         BlockPlacer blockPlacer = new BlockPlacer(plugin);
         AutoDropper autoDropper = new AutoDropper(plugin);
+        AutoPlanter autoPlanter = new AutoPlanter(plugin);
+        MobGrinder mobGrinder = new MobGrinder(plugin);
 
         FillerItem fillerItem = new FillerItem(plugin);
     }

@@ -3,6 +3,22 @@
 ## Description
 A plugin for minecraft CraftBukkit/Spigot/PaperMC that adds new machinery to the game to help with automation
 
+## Features
+- New Items
+    - Vaccum Hopper
+    - Block Placer
+    - Block Breaker
+    - Auto Dropper
+    
+- Configuration
+    - Full control of all featues
+    - Enable/Disable particles/sound
+    - Configure custom item settings
+    - Configure naming convention
+    - Custom Texture Support
+- API
+    - Generate item Easily
+
 ## Items
 #### Vaccum Hopper
 The vaccum hopper attracts items and once they are close enough it 
