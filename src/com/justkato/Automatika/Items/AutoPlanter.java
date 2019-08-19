@@ -121,9 +121,16 @@ public class AutoPlanter implements Listener {
             particle_location.add(.5f, 1.25f, .5f);
 
             ItemStack to_plant = dispenser_block.getInventory().getItem(4);
+
+            // If there's no item inside of the planter
+            if ( to_plant == null || to_plant.equals(Material.AIR) ) {
+                loc.getWorld().playSound(loc, Sound.ITEM_SHIELD_BREAK, 1f, 0.75f);
+                return;
+            }
+
             Block plant = block_in_front.getLocation().clone().add(0, 1, 0).getBlock();
 
-            if ( !plant.getType().equals(Material.AIR) ) {
+            if ( plant == null || !plant.getType().equals(Material.AIR) ) {
                 loc.getWorld().playSound(loc, Sound.ITEM_SHIELD_BREAK, 1f, 0.75f);
                 return;
             }
@@ -131,6 +138,11 @@ public class AutoPlanter implements Listener {
             if ( getSeedBlock(to_plant) != null ) {
                 Material plant_material = getSeedBlock(to_plant);
                 Material plant_on_mater = getPlantSoil(plant_material);
+
+                if ( plant_material == null || plant_material.equals(Material.AIR) || plant_on_mater == null || plant_on_mater.equals(Material.AIR) ) {
+                    loc.getWorld().playSound(loc, Sound.ITEM_SHIELD_BREAK, 1f, 0.75f);
+                    return;
+                }
 
                 if ( block_in_front.getType().equals(plant_on_mater) || (block_in_front.getType().equals(Material.DIRT) && plant_on_mater.equals(Material.GRASS_BLOCK)) ) {
                     plant.setType(plant_material); // Set the plant's block

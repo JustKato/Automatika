@@ -60,7 +60,6 @@ public class Calculator {
                 damage += item.getEnchantmentLevel(Enchantment.DAMAGE_ARTHROPODS) * 2.5;
             }
         } catch (Exception ex ) {};
-        System.out.println(damage);
         return damage;
     }
 

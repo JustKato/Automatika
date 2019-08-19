@@ -74,6 +74,7 @@ public class MobGrinder implements Listener {
                     if ( block.isBlockPowered() ) {
                         for (Entity ent : loc.getWorld().getNearbyEntities(loc, range, range, range)) {
                             if ( ent instanceof Monster ) {
+                                if ( ent.getType().equals(EntityType.EXPERIENCE_ORB) ) continue;
                                 Monster monster = (Monster) ent;
                                 loc.getWorld().spawnParticle(Particle.CRIT, ent.getLocation(), 20, 0.3f, 0.2f, 0.3f, 0.06f);
                                 monster.damage(Calculator.CalculateItemDamage(attack_item, ent));

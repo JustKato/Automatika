@@ -89,9 +89,7 @@ public class VaccumHopper implements Listener {
                                 nearby.setVelocity(nearby.getVelocity().add(direction.divide(new Vector(2, 2, 2))));
                             }
                         }
-                    } catch (Exception ex ) {
-                        Bukkit.broadcastMessage(ex.toString());
-                    }
+                    } catch (Exception ex ) {}
 
                 }
             }

@@ -14,10 +14,19 @@ public class ItemMaster {
     public static List<ItemStack> getItemlist() {
         List<ItemStack> item_list = new ArrayList<>();
         item_list.add(VaccumHopper.GenerateItem());
-        item_list.add(BlockBreaker.GenerateItem());
-        item_list.add(BlockPlacer.GenerateItem());
+        item_list.add(EnderHopper.GenerateItem());
+        item_list.add(MobHopper.GenerateItem());
+        item_list.add(ExpHopper.GenerateItem());
+
+        item_list.add(FillerItem.GenerateItem());
+
         item_list.add(AutoDropper.GenerateItem());
         item_list.add(AutoPlanter.GenerateItem());
+
+        item_list.add(FillerItem.GenerateItem());
+
+        item_list.add(BlockBreaker.GenerateItem());
+        item_list.add(BlockPlacer.GenerateItem());
         item_list.add(MobGrinder.GenerateItem());
 
         return item_list;

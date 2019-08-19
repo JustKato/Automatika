@@ -1,6 +1,6 @@
 name: Automatika
 main: com.justkato.Automatika.Main
-version: "1.3.1"
+version: "1.6.2"
 author: "Kato Twofold"
 description: "A plugin that adds new automation machines/blocks/items to minecraft"
 api-version: "1.14"
