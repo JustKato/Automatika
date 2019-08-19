@@ -62,7 +62,7 @@ public class MobGrinder implements Listener {
             public void run() {
                 for ( Location loc : locations ) {
 
-                    if ( !loc.getChunk().isLoaded() ) return;
+                    if ( !loc.getChunk().isLoaded() ) continue;
 
                     Block block = loc.getBlock(); // Get the block
                     Dispenser grinder_block = (Dispenser) block.getState();

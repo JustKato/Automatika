@@ -47,6 +47,9 @@ public class ExpHopper implements Listener {
             @Override
             public void run() {
                 for ( Location loc : locations ) {
+
+                    if ( !loc.getChunk().isLoaded() ) continue;
+
                     Location arrival = loc.clone(); arrival.add(.5, .5, .5);
                     Entity closest = null;
                     boolean cancel = false;

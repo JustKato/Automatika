@@ -18,12 +18,9 @@ public class ItemMaster {
         item_list.add(MobHopper.GenerateItem());
         item_list.add(ExpHopper.GenerateItem());
 
-        item_list.add(FillerItem.GenerateItem());
-
         item_list.add(AutoDropper.GenerateItem());
         item_list.add(AutoPlanter.GenerateItem());
-
-        item_list.add(FillerItem.GenerateItem());
+        item_list.add(Harvester.GenerateItem());
 
         item_list.add(BlockBreaker.GenerateItem());
         item_list.add(BlockPlacer.GenerateItem());

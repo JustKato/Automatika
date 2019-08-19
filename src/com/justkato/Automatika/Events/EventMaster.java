@@ -25,6 +25,7 @@ public class EventMaster {
         AutoDropper autoDropper = new AutoDropper(plugin);
         AutoPlanter autoPlanter = new AutoPlanter(plugin);
         MobGrinder mobGrinder = new MobGrinder(plugin);
+        Harvester harvester = new Harvester(plugin);
 
         FillerItem fillerItem = new FillerItem(plugin);
     }

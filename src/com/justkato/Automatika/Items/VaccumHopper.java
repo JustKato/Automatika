@@ -54,7 +54,7 @@ public class VaccumHopper implements Listener {
             public void run() {
                 for ( Location hopper: locations ) {
 
-                    if ( !hopper.getChunk().isLoaded() ) return;
+                    if ( !hopper.getChunk().isLoaded() ) continue;
 
                     // Error Checking
                     if ( !hopper.getBlock().getType().equals(Material.HOPPER) ) { locations.remove(hopper); break; }
